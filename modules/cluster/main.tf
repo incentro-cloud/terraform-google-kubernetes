@@ -39,5 +39,6 @@ resource "google_container_cluster" "cluster" {
 
   node_config {
     service_account = var.service_account
+    preemptible     = var.preemptible
   }
 }

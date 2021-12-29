@@ -20,7 +20,11 @@ variable "description" {
 }
 
 variable "service_account" {
-  type    = string
+  type = string
+}
+
+variable "preemptible" {
+  type = string
 }
 
 variable "remove_default_node_pool" {

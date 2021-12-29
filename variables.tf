@@ -27,6 +27,10 @@ variable "service_account" {
   default = ""
 }
 
+variable "preemptible" {
+  type = false
+}
+
 variable "remove_default_node_pool" {
   type    = bool
   default = true
