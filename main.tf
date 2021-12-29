@@ -30,7 +30,7 @@ locals {
   pools = [
     for pool in var.pools : {
       name           = pool.name
-      location       = lookup(pool, "cluster", module.cluster.cluster.location)
+      location       = lookup(pool, "location", null)
       cluster        = lookup(pool, "cluster", module.cluster.cluster.name)
       node_count     = lookup(pool, "node_count", null)
       node_config    = lookup(pool, "node_config", null)
