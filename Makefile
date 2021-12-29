@@ -27,7 +27,7 @@ go_test:
 	export GOOGLE_APPLICATION_CREDENTIALS=$(GOOGLE_APPLICATION_CREDENTIALS); \
 	export PROJECT_ID=$(PROJECT_ID); \
 	cd test; \
-	go test -v
+	go test -v -timeout 1h
 
 # Initialize the workspace.
 .PHONY: tf_init

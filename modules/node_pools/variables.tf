@@ -3,7 +3,7 @@ variable "project_id" {
   description = "The project identifier."
 }
 
-variable "pools" {
+variable "node_pools" {
   type        = any
   description = "The node pools."
 }

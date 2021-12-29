@@ -34,3 +34,7 @@ variable "network" {
 variable "subnetwork" {
   type = string
 }
+
+variable "service_account_roles" {
+  type    = list(string)
+}

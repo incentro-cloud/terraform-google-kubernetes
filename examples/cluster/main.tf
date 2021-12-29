@@ -79,11 +79,6 @@ module "network" {
   ]
 }
 
-resource "google_service_account" "cluster-01" {
-  account_id = "cluster-01"
-  project    = var.project_id
-}
-
 module "kubernetes" {
   source = "../../"
 
@@ -94,9 +89,9 @@ module "kubernetes" {
   network        = module.network.vpc_name
   subnetwork     = module.network.subnets_names[0]
 
-  pools = [
+  node_pools = [
     {
-      name       = "node-pool-01"
+      name = "node-pool-01"
 
       autoscaling = {
         min_node_count = 3
@@ -106,7 +101,6 @@ module "kubernetes" {
       node_config = {
         preemptible     = true
         machine_type    = "e2-small"
-        service_account = google_service_account.cluster-01.email
       }
     }
   ]

@@ -19,6 +19,7 @@ module "cluster" {
   initial_node_count       = var.initial_node_count
   network                  = var.network
   subnetwork               = var.subnetwork
+  service_account_roles    = var.service_account_roles
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -26,22 +27,23 @@ module "cluster" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 locals {
-  pools = [
-    for pool in var.pools : {
-      name           = pool.name
-      location       = lookup(pool, "location", module.cluster.cluster.location)
-      cluster        = lookup(pool, "cluster", module.cluster.cluster.name)
-      autoscaling    = lookup(pool, "autoscaling", null)
-      node_count     = lookup(pool, "node_count", null)
-      node_config    = lookup(pool, "node_config", null)
-      node_locations = lookup(pool, "node_locations", module.cluster.cluster.node_locations)
+  node_pools = [
+    for node_pool in var.node_pools : {
+      name            = node_pool.name
+      location        = lookup(node_pool, "location", module.cluster.cluster.location)
+      cluster         = lookup(node_pool, "cluster", module.cluster.cluster.name)
+      service_account = lookup(node_pool, "service_account", module.cluster.service_account_email)
+      autoscaling     = lookup(node_pool, "autoscaling", null)
+      node_count      = lookup(node_pool, "node_count", null)
+      node_config     = lookup(node_pool, "node_config", null)
+      node_locations  = lookup(node_pool, "node_locations", module.cluster.cluster.node_locations)
     }
   ]
 }
 
-module "pools" {
-  source = "./modules/pools"
+module "node_pools" {
+  source = "./modules/node_pools"
 
   project_id = var.project_id
-  pools      = local.pools
+  node_pools = local.node_pools
 }

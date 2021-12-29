@@ -1,6 +1,6 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # CLUSTER
-# Submodule for creating a cluster.
+# Submodule for creating a cluster including a service account and the roles.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -23,6 +23,32 @@ terraform {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
+# SERVICE ACCOUNT AND ROLES (IAM MEMBERS, NON-AUTHORITATIVE)
+# ---------------------------------------------------------------------------------------------------------------------
+
+resource "google_service_account" "account" {
+  account_id   = var.name
+  display_name = "The service account for ${var.name}"
+  project      = var.project_id
+}
+
+locals {
+  service_account_roles = concat(var.service_account_roles, [
+    "roles/logging.logWriter",
+    "roles/monitoring.metricWriter",
+    "roles/monitoring.viewer",
+    "roles/stackdriver.resourceMetadata.writer"
+  ])
+}
+
+resource "google_project_iam_member" "service_account_roles" {
+  for_each = toset(local.service_account_roles)
+  project  = var.project_id
+  role     = each.value
+  member   = "serviceAccount:${google_service_account.account.email}"
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
 # CLUSTER
 # ---------------------------------------------------------------------------------------------------------------------
 
@@ -36,4 +62,8 @@ resource "google_container_cluster" "cluster" {
   initial_node_count       = var.initial_node_count
   network                  = var.network
   subnetwork               = var.subnetwork
+
+  node_config {
+    service_account = google_service_account.account.email
+  }
 }

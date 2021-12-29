@@ -42,7 +42,14 @@ variable "subnetwork" {
   default = ""
 }
 
-variable "pools" {
+variable "node_pools" {
   type        = any
   description = "The node pools."
+  default     = []
+}
+
+variable "service_account_roles" {
+  type        = list(string)
+  description = "The service account roles."
+  default     = []
 }
