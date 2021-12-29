@@ -27,13 +27,14 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "google_container_node_pool" "node_pools" {
-  for_each       = { for node_pool in var.node_pools : lower(node_pool.name) => node_pool }
-  name           = each.value.name
-  project        = var.project_id
-  location       = each.value.location
-  cluster        = each.value.cluster
-  node_count     = each.value.node_count
-  node_locations = each.value.node_locations
+  for_each           = { for node_pool in var.node_pools : lower(node_pool.name) => node_pool }
+  name               = each.value.name
+  project            = var.project_id
+  location           = each.value.location
+  cluster            = each.value.cluster
+  node_count         = each.value.node_count
+  node_locations     = each.value.node_locations
+  initial_node_count = each.value.initial_node_count
 
   dynamic "autoscaling" {
     for_each = lookup(each.value, "autoscaling") == null ? [] : [each.value.autoscaling]

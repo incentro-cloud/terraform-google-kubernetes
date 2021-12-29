@@ -29,14 +29,15 @@ module "cluster" {
 locals {
   node_pools = [
     for node_pool in var.node_pools : {
-      name            = node_pool.name
-      location        = lookup(node_pool, "location", module.cluster.cluster.location)
-      cluster         = lookup(node_pool, "cluster", module.cluster.cluster.name)
-      service_account = lookup(node_pool, "service_account", module.cluster.service_account_email)
-      autoscaling     = lookup(node_pool, "autoscaling", null)
-      node_count      = lookup(node_pool, "node_count", null)
-      node_config     = lookup(node_pool, "node_config", null)
-      node_locations  = lookup(node_pool, "node_locations", module.cluster.cluster.node_locations)
+      name               = node_pool.name
+      location           = lookup(node_pool, "location", module.cluster.cluster.location)
+      cluster            = lookup(node_pool, "cluster", module.cluster.cluster.name)
+      service_account    = lookup(node_pool, "service_account", module.cluster.service_account_email)
+      initial_node_count = lookup(node_pool, "initial_node_count", null)
+      autoscaling        = lookup(node_pool, "autoscaling", null)
+      node_count         = lookup(node_pool, "node_count", null)
+      node_config        = lookup(node_pool, "node_config", null)
+      node_locations     = lookup(node_pool, "node_locations", module.cluster.cluster.node_locations)
     }
   ]
 }

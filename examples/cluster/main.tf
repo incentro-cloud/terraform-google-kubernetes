@@ -91,7 +91,8 @@ module "kubernetes" {
 
   node_pools = [
     {
-      name = "node-pool-01"
+      name               = "node-pool-01"
+      initial_node_count = 3
 
       autoscaling = {
         min_node_count = 3
@@ -99,8 +100,8 @@ module "kubernetes" {
       }
 
       node_config = {
-        preemptible     = true
-        machine_type    = "e2-small"
+        preemptible  = true
+        machine_type = "e2-small"
       }
     }
   ]
