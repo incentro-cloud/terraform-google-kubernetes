@@ -18,6 +18,7 @@ module "cluster" {
   remove_default_node_pool = var.remove_default_node_pool
   initial_node_count       = var.initial_node_count
   service_account          = var.service_account
+  preemptible              = var.preemptible
   network                  = var.network
   subnetwork               = var.subnetwork
 }
