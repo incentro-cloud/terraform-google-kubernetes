@@ -87,17 +87,21 @@ resource "google_service_account" "cluster-01" {
 module "kubernetes" {
   source = "../../"
 
-  project_id      = var.project_id
-  name            = "cluster-01"
-  location        = "europe-west1"
-  network         = module.network.vpc_name
-  subnetwork      = module.network.subnets_names[0]
-  service_account = google_service_account.cluster-01.email
+  project_id     = var.project_id
+  name           = "cluster-01"
+  location       = "europe-west1"
+  node_locations = ["europe-west1-b", "europe-west1-c", "europe-west1-d"]
+  network        = module.network.vpc_name
+  subnetwork     = module.network.subnets_names[0]
 
   pools = [
     {
       name       = "node-pool-01"
-      node_count = 1
+
+      autoscaling = {
+        min_node_count = 3
+        max_node_count = 9
+      }
 
       node_config = {
         preemptible     = true

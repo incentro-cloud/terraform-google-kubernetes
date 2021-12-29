@@ -31,6 +31,7 @@ locals {
       name           = pool.name
       location       = lookup(pool, "location", module.cluster.cluster.location)
       cluster        = lookup(pool, "cluster", module.cluster.cluster.name)
+      autoscaling    = lookup(pool, "autoscaling", null)
       node_count     = lookup(pool, "node_count", null)
       node_config    = lookup(pool, "node_config", null)
       node_locations = lookup(pool, "node_locations", module.cluster.cluster.node_locations)
