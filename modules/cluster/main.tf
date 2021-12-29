@@ -62,8 +62,4 @@ resource "google_container_cluster" "cluster" {
   initial_node_count       = var.initial_node_count
   network                  = var.network
   subnetwork               = var.subnetwork
-
-  node_config {
-    service_account = google_service_account.account.email
-  }
 }
