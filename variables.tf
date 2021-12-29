@@ -22,15 +22,6 @@ variable "description" {
   default = ""
 }
 
-variable "service_account" {
-  type    = string
-  default = ""
-}
-
-variable "preemptible" {
-  type = bool
-}
-
 variable "remove_default_node_pool" {
   type    = bool
   default = true

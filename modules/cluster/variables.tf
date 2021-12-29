@@ -19,14 +19,6 @@ variable "description" {
   type = string
 }
 
-#variable "service_account" {
-#  type = string
-#}
-#
-#variable "preemptible" {
-#  type = bool
-#}
-
 variable "remove_default_node_pool" {
   type = bool
 }
