@@ -14,7 +14,6 @@ variable "location" {
 
 variable "node_locations" {
   type    = list(string)
-  default = []
 }
 
 variable "description" {
