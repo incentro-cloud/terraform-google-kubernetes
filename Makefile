@@ -34,7 +34,7 @@ go_test:
 tf_init:
 	export GOOGLE_APPLICATION_CREDENTIALS=$(GOOGLE_APPLICATION_CREDENTIALS); \
 	cd terraform; \
-	terraform init -backend-config="bucket=$(PROJECT_ID)-tfstate"
+	terraform init -backend-config="bucket=$(PROJECT_ID)-tfstate-cloud"
 
 # Validate the configuration files.
 .PHONY: tf_validate
