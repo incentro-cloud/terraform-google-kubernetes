@@ -21,6 +21,8 @@ module "cluster" {
   subnetwork               = var.subnetwork
   service_account_roles    = var.service_account_roles
   private_cluster_config   = var.private_cluster_config
+  networking_mode          = var.networking_mode
+  ip_allocation_policy     = var.ip_allocation_policy
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
