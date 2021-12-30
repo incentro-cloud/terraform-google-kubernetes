@@ -68,7 +68,7 @@ resource "google_container_cluster" "cluster" {
     content {
       enable_private_nodes    = lookup(private_cluster_config.value, "enable_private_nodes", true)
       enable_private_endpoint = lookup(private_cluster_config.value, "enable_private_endpoint", false)
-      master_ipv4_cidr_block  = lookup(private_cluster_config.value, "master_ipv_cidr_block", null)
+      master_ipv4_cidr_block  = lookup(private_cluster_config.value, "master_ipv4_cidr_block", null)
     }
   }
 }
