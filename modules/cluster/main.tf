@@ -78,7 +78,7 @@ resource "google_container_cluster" "cluster" {
     content {
       cluster_secondary_range_name  = lookup(ip_allocation_policy.value, "cluster_secondary_range_name", null)
       services_secondary_range_name = lookup(ip_allocation_policy.value, "services_secondary_range_name", null)
-      cluster_ipv4_cidr_block       = lookup(ip_allocation_policy.value, "cluster_ipv4_cidr_block", null)
+      cluster_ipv4_cidr_block       = lookup(ip_allocation_policy.value, "cluster_ipv4_cidr_block", "/24")
       services_ipv4_cidr_block      = lookup(ip_allocation_policy.value, "services_ipv4_cidr_block ", null)
     }
   }
