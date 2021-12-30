@@ -52,6 +52,7 @@ resource "google_container_node_pool" "node_pools" {
       service_account = each.value.service_account
       oauth_scopes    = lookup(node_config.value, "oauth_scopes", ["https://www.googleapis.com/auth/cloud-platform"])
       metadata        = lookup(node_config.value, "metadata", null)
+      tags            = lookup(node_config.value, "tags", null)
     }
   }
 }
