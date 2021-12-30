@@ -86,13 +86,15 @@ module "kubernetes" {
   name           = "cluster-01"
   location       = "europe-west1"
   node_locations = ["europe-west1-b", "europe-west1-c", "europe-west1-d"]
-  network        = module.network.vpc_name
-  subnetwork     = module.network.subnets_names[0]
+  network        = module.network.vpc_id
+  subnetwork     = "default"
+
+  private_cluster_config = {}
 
   node_pools = [
     {
-      name               = "node-pool-01"
-      initial_node_count = 3
+      name       = "node-pool-01"
+      node_count = 3
 
       autoscaling = {
         min_node_count = 3
@@ -101,8 +103,10 @@ module "kubernetes" {
 
       node_config = {
         preemptible  = true
-        machine_type = "e2-small"
+        machine_type = "e2-medium"
       }
     }
   ]
+
+  depends_on = [module.network]
 }

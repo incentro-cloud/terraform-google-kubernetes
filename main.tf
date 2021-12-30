@@ -20,6 +20,7 @@ module "cluster" {
   network                  = var.network
   subnetwork               = var.subnetwork
   service_account_roles    = var.service_account_roles
+  private_cluster_config   = var.private_cluster_config
 }
 
 # ---------------------------------------------------------------------------------------------------------------------

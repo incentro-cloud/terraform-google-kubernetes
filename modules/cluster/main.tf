@@ -28,7 +28,7 @@ terraform {
 
 resource "google_service_account" "account" {
   account_id   = var.name
-  display_name = "The service account for ${var.name}"
+  display_name = "Service account for ${var.name}"
   project      = var.project_id
 }
 
@@ -62,4 +62,11 @@ resource "google_container_cluster" "cluster" {
   initial_node_count       = var.initial_node_count
   network                  = var.network
   subnetwork               = var.subnetwork
+
+  dynamic "private_cluster_config" {
+    for_each = lookup(each.value, "private_cluster_config") == null ? [] : [each.value.private_cluster_config]
+    content {
+      enable_private_endpoint = lookup(node_config.value, "enable_private_endpoint", true)
+    }
+  }
 }

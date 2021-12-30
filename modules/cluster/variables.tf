@@ -36,5 +36,10 @@ variable "subnetwork" {
 }
 
 variable "service_account_roles" {
-  type    = list(string)
+  type = list(string)
+}
+
+variable "private_cluster_config" {
+  type        = any
+  description = "The service account roles."
 }

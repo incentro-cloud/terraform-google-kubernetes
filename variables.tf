@@ -53,3 +53,9 @@ variable "service_account_roles" {
   description = "The service account roles."
   default     = []
 }
+
+variable "private_cluster_config" {
+  type        = any
+  description = "The service account roles."
+  default     = {}
+}
