@@ -40,7 +40,7 @@ locals {
       initial_node_count = lookup(node_pool, "initial_node_count", null)
       autoscaling        = lookup(node_pool, "autoscaling", null)
       node_count         = lookup(node_pool, "node_count", null)
-      node_config        = lookup(node_pool, "node_config", null)
+      node_config        = node_pool.node_config
       node_locations     = lookup(node_pool, "node_locations", module.cluster.cluster.node_locations)
     }
   ]
