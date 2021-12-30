@@ -39,6 +39,10 @@ variable "networking_mode" {
   type = string
 }
 
+variable "enable_intranode_visibility" {
+  type = bool
+}
+
 variable "ip_allocation_policy" {
   type = any
 }

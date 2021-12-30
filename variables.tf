@@ -34,7 +34,7 @@ variable "initial_node_count" {
 
 variable "network" {
   type    = string
-  default = "default"
+  default = ""
 }
 
 variable "subnetwork" {
@@ -45,6 +45,11 @@ variable "subnetwork" {
 variable "networking_mode" {
   type    = string
   default = "VPC_NATIVE"
+}
+
+variable "enable_intranode_visibility" {
+  type    = bool
+  default = true
 }
 
 variable "private_cluster_config" {

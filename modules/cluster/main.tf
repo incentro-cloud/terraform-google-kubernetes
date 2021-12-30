@@ -53,16 +53,17 @@ resource "google_project_iam_member" "service_account_roles" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "google_container_cluster" "cluster" {
-  name                     = var.name
-  description              = var.description
-  project                  = var.project_id
-  location                 = var.location
-  node_locations           = var.node_locations
-  remove_default_node_pool = var.remove_default_node_pool
-  initial_node_count       = var.initial_node_count
-  network                  = var.network
-  subnetwork               = var.subnetwork
-  networking_mode          = var.networking_mode
+  name                        = var.name
+  description                 = var.description
+  project                     = var.project_id
+  location                    = var.location
+  node_locations              = var.node_locations
+  remove_default_node_pool    = var.remove_default_node_pool
+  initial_node_count          = var.initial_node_count
+  network                     = var.network
+  subnetwork                  = var.subnetwork
+  networking_mode             = var.networking_mode
+  enable_intranode_visibility = var.enable_intranode_visibility
 
   dynamic "private_cluster_config" {
     for_each = var.private_cluster_config == {} ? [] : [var.private_cluster_config]
