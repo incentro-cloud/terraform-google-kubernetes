@@ -67,6 +67,7 @@ resource "google_container_cluster" "cluster" {
     for_each = var.private_cluster_config == {} ? [] : [var.private_cluster_config]
     content {
       enable_private_nodes = lookup(node_config.value, "enable_private_nodes", true)
+      enable_private_endpoint = lookup(node_config.value, "enable_private_endpoint", false)
     }
   }
 }
