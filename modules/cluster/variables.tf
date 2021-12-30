@@ -35,11 +35,18 @@ variable "subnetwork" {
   type = string
 }
 
+variable "networking_mode" {
+  type = string
+}
+
+variable "ip_allocation_policy" {
+  type = any
+}
+
 variable "service_account_roles" {
   type = list(string)
 }
 
 variable "private_cluster_config" {
-  type        = any
-  description = "The service account roles."
+  type = any
 }

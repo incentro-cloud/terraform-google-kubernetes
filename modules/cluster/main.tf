@@ -62,6 +62,7 @@ resource "google_container_cluster" "cluster" {
   initial_node_count       = var.initial_node_count
   network                  = var.network
   subnetwork               = var.subnetwork
+  networking_mode          = var.networking_mode
 
   dynamic "private_cluster_config" {
     for_each = var.private_cluster_config == {} ? [] : [var.private_cluster_config]
@@ -69,6 +70,16 @@ resource "google_container_cluster" "cluster" {
       enable_private_nodes    = lookup(private_cluster_config.value, "enable_private_nodes", true)
       enable_private_endpoint = lookup(private_cluster_config.value, "enable_private_endpoint", false)
       master_ipv4_cidr_block  = lookup(private_cluster_config.value, "master_ipv4_cidr_block", null)
+    }
+  }
+
+  dynamic "ip_allocation_policy" {
+    for_each = var.ip_allocation_policy == {} ? [] : [var.ip_allocation_policy]
+    content {
+      cluster_secondary_range_name  = lookup(ip_allocation_policy.value, "cluster_secondary_range_name", null)
+      services_secondary_range_name = lookup(ip_allocation_policy.value, "services_secondary_range_name", null)
+      cluster_ipv4_cidr_block       = lookup(ip_allocation_policy.value, "cluster_ipv4_cidr_block", null)
+      services_ipv4_cidr_block      = lookup(ip_allocation_policy.value, "services_ipv4_cidr_block ", null)
     }
   }
 }

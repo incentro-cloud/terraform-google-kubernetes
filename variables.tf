@@ -42,6 +42,21 @@ variable "subnetwork" {
   default = ""
 }
 
+variable "networking_mode" {
+  type    = string
+  default = "VPC_NATIVE"
+}
+
+variable "private_cluster_config" {
+  type    = any
+  default = {}
+}
+
+variable "ip_allocation_policy" {
+  type    = any
+  default = {}
+}
+
 variable "node_pools" {
   type        = any
   description = "The node pools."
@@ -52,10 +67,4 @@ variable "service_account_roles" {
   type        = list(string)
   description = "The service account roles."
   default     = []
-}
-
-variable "private_cluster_config" {
-  type        = any
-  description = "The service account roles."
-  default     = {}
 }
