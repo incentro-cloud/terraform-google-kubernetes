@@ -52,6 +52,11 @@ variable "enable_intranode_visibility" {
   default = true
 }
 
+variable "monitoring_config" {
+  type    = any
+  default = {}
+}
+
 variable "private_cluster_config" {
   type    = any
   default = {}

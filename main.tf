@@ -20,6 +20,7 @@ module "cluster" {
   network                     = var.network
   subnetwork                  = var.subnetwork
   service_account_roles       = var.service_account_roles
+  monitoring_config           = var.monitoring_config
   private_cluster_config      = var.private_cluster_config
   networking_mode             = var.networking_mode
   enable_intranode_visibility = var.enable_intranode_visibility

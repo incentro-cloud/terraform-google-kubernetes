@@ -54,3 +54,8 @@ variable "service_account_roles" {
 variable "private_cluster_config" {
   type = any
 }
+
+variable "monitoring_config" {
+  type    = any
+  default = {}
+}
