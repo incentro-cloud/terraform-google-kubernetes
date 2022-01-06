@@ -70,7 +70,7 @@ resource "google_container_cluster" "cluster" {
   dynamic "monitoring_config" {
     for_each = var.monitoring_config == {} ? [] : [var.monitoring_config]
     content {
-      enable_components = lookup(monitoring_config.value, "enable_components", null)
+      enable_components = lookup(monitoring_config.value, "enable_components", ["SYSTEM_COMPONENTS", "WORKLOADS"])
     }
   }
 
