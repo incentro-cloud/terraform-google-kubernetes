@@ -53,6 +53,8 @@ resource "google_project_iam_member" "service_account_roles" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "google_container_cluster" "cluster" {
+  provider = google-beta
+
   name                        = var.name
   description                 = var.description
   project                     = var.project_id
@@ -64,6 +66,13 @@ resource "google_container_cluster" "cluster" {
   subnetwork                  = var.subnetwork
   networking_mode             = var.networking_mode
   enable_intranode_visibility = var.enable_intranode_visibility
+
+  dynamic "monitoring_config" {
+    for_each = var.monitoring_config == {} ? [] : [var.monitoring_config]
+    content {
+      enable_components = lookup(monitoring_config.value, "enable_components", "WORKLOADS")
+    }
+  }
 
   dynamic "private_cluster_config" {
     for_each = var.private_cluster_config == {} ? [] : [var.private_cluster_config]
